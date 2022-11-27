@@ -1,9 +1,12 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { hasWinner } from './utils/hasWinner'
 
 const board = ref(Array(9).fill(null))
 const previousPlayer = ref(null)
+
+// 0 - circle
+// 1 - cross
 const currentPlayer = ref(Math.round(Math.random()))
 
 const someoneHasWon = computed(() => hasWinner(board.value))
@@ -12,8 +15,8 @@ const isDraw = computed(
 )
 const isGameOver = computed(() => someoneHasWon.value || isDraw.value)
 
-// &#9711; - player 0 (circle)
-// &#10005; - player 1 (cross)
+// &#9711; - circle
+// &#10005; - cross
 const getPlayerHtmlEntity = playerId =>
   playerId !== null ? ['&#9711;', '&#10005;'][playerId] : ''
 
